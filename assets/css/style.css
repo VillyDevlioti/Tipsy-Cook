@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../images/background-image-tipsy-cook.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
