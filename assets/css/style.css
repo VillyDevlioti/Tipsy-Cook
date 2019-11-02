@@ -6,8 +6,8 @@ body {
     /*background-image: url('../images/background-tipsy-cook.jpg');*/
     background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('../images/background-tipsy-cook.jpg');
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover; 
-    margin: 0;
 }
 
 h1 {
@@ -23,11 +23,15 @@ h2 {
 h1, h2 {
     color: white;
     margin: 5% 0;
-    text-shadow: 2px 2px 2px #000;
+
 }
 
 .headline {
     padding-top: 20%;
     text-align: center;
+}
+
+#sign-in-modal {
+    line-height: 2rem;
 }
 
