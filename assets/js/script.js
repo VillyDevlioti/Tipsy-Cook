@@ -25,7 +25,7 @@ $( document ).ready(function() {
     $("#submit-button").on("click", function(event) {
         event.preventDefault();
         // Get the input values
-        var userFirstName = $("#sign-in-first-name-input").val().trim();
+        var userFirstName = $("#sign-in-name-input").val().trim();
         var userLastName = $("#sign-in-last-name-input").val().trim();
         var userEmail = $("#sign-in-email-input").val().trim();
         
@@ -34,10 +34,9 @@ $( document ).ready(function() {
         console.log(userFirstName);
         console.log(userLastName);
         console.log(userEmail);
-      
-        
-          // Save the new user info in Firebase.
-          database.ref().set({
+
+        // Save the new user info in Firebase.
+        database.ref('/user-data').push({
             firstName: userFirstName,
             lastName: userLastName,
             email: userEmail,
@@ -46,17 +45,18 @@ $( document ).ready(function() {
             question3: [],
           });
 
-          database.ref().on("value", function(snapshot) {
-
-              firstName = snapshot.val().userFirstName;
-            });
+          database.ref('/user-data').on("value", function(snapshot) {
           
-            console.log(firstName);
+            console.log(snapshot.val());
+            
           
             // If any errors are experienced, log them to console.
           }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
           });
+      
+    });
+          
    
 
     //create global variables for question arrays
