@@ -3,7 +3,11 @@
 }
 
 body {
-    background-image: url('../images/background-image-tipsy-cook.jpg');
+    background-image: url('../images/background-tipsy-cook.jpg');
     background-repeat: no-repeat;
-    
+    background-size: cover; 
+}
+
+h1 {
+    color: white;
 }
