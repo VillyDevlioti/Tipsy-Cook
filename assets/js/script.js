@@ -33,7 +33,7 @@ $( document ).ready(function() {
         // Log the Bidder and Price (Even if not the highest)
         console.log(userFirstName);
         console.log(userLastName);
-        console.log(email);
+        console.log(userEmail);
       
         
           // Save the new user info in Firebase.
