@@ -57,7 +57,7 @@
             })
             $(".card-img-top").append(img);
 
-            $(".card-text").append($("<p>").text(response.drinks[0].strDrink))
+            $(".card-text").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
             $(".card-text").append($("<p><strong>Ingredients:</strong></p>"))
 
             var cnt = 1;
@@ -65,7 +65,7 @@
                 if (key.indexOf("strIngredient") !== -1) {
                     if (response.drinks[0][key]) {
                         console.log(key);
-                        appendElemToCard(response.drinks[0][key] + ' ' + response.drinks[0]["strMeasure" + cnt++]);
+                        appendElemToCard(response.drinks[0]["strMeasure" + cnt++] + " " + response.drinks[0][key]);
                     }
                 }
             }
