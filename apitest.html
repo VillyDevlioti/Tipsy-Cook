@@ -49,44 +49,35 @@
             method: "GET"
         }).then(function (response) {
             console.log(response.drinks[0]);
-            console.log("Drink name: " + response.drinks[0].strDrink);
-            console.log("This drink is " + response.drinks[0].strAlcoholic + " from the " + response.drinks[0].strIBA + " cathegory" + ". It is also an " + response.drinks[0].strCategory)
-            console.log("You serve this puppy in a " + response.drinks[0].strGlass)
-            console.log("Instructions: " + response.drinks[0].strInstructions)
-            console.log("Ingredients:")
-            // console.log(response.drinks[0].strIngredient1)
-            // console.log(response.drinks[0].strIngredient2)
-            // console.log(response.drinks[0].strIngredient3)
-            // console.log(response.drinks[0].strIngredient4)
-            // console.log(response.drinks[0].strIngredient5)
-            // console.log(response.drinks[0].strIngredient6)
-            // console.log(response.drinks[0].strIngredient7)
-            // console.log(response.drinks[0].strDrinkThumb)
-
-            for (key in response.drinks[0]) {
-                if (key.indexOf("strIngredient") !== -1) {
-                    if (response.drinks[0][key]){
-                        // console.log(key);    
-                        appendElemToCard(response.drinks[0][key]);
-                    }
-                }
-            }
 
             var img = $(".card-img-top").attr({
                 "src": response.drinks[0].strDrinkThumb,
                 "width": 200,
 
             })
-            console.log(img);
             $(".card-img-top").append(img);
+
             $(".card-text").append($("<p>").text(response.drinks[0].strDrink))
+            $(".card-text").append($("<p><strong>Ingredients:</strong></p>"))
+
+            var cnt = 1;
+            for (key in response.drinks[0]) {
+                if (key.indexOf("strIngredient") !== -1) {
+                    if (response.drinks[0][key]) {
+                        console.log(key);
+                        appendElemToCard(response.drinks[0][key] + ' ' + response.drinks[0]["strMeasure" + cnt++]);
+                    }
+                }
+            }
+
             $(".card-text").append($("<p>").text(response.drinks[0].strInstructions))
-            $(".card-text").append($("<p>").text("Ingredients:" + response.drinks[0].strInstructions))
+
         });
 
-        function appendElemToCard (str) {
+        function appendElemToCard(str) {
             $(".card-text").append($("<p>").text(str));
         }
+
 
 
 
