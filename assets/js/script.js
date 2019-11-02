@@ -22,18 +22,18 @@ $( document ).ready(function() {
         //$('submit').on("click", function {});
             //push user data $(form-data).val().trim() to firebase db
 
-    $("#user-submit").on("click", function(event) {
+    $("#submit-button").on("click", function(event) {
         event.preventDefault();
         // Get the input values
-        var userFirstName = $("#first-name").val().trim();
-        var userLastName = $("#last-name").val().trim();
-        var userEmail = $("#email").val().trim();
+        var userFirstName = $("#sign-in-first-name-input").val().trim();
+        var userLastName = $("#sign-in-last-name-input").val().trim();
+        var userEmail = $("#sign-in-email-input").val().trim();
         
       
         // Log the Bidder and Price (Even if not the highest)
         console.log(userFirstName);
         console.log(userLastName);
-        console.log(email);
+        console.log(userEmail);
       
         
           // Save the new user info in Firebase.
