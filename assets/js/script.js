@@ -55,7 +55,7 @@ $( document ).ready(function() {
             console.log("The read failed: " + errorObject.code);
           });
 
-          //clears modal after submit
+          //clears modal after user hits submit button
           $("#sign-in-modal").remove();
       
     });
