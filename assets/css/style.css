@@ -3,11 +3,31 @@
 }
 
 body {
-    background-image: url('../images/background-tipsy-cook.jpg');
+    /*background-image: url('../images/background-tipsy-cook.jpg');*/
+    background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('../images/background-tipsy-cook.jpg');
     background-repeat: no-repeat;
     background-size: cover; 
+    margin: 0;
 }
 
 h1 {
-    color: white;
+    font-family: 'Bitter', serif;
+    font-size: 64px;
 }
+
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 24px;
+}
+
+h1, h2 {
+    color: white;
+    margin: 5% 0;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.headline {
+    padding-top: 20%;
+    text-align: center;
+}
+
