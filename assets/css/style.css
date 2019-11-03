@@ -35,3 +35,8 @@ h1, h2 {
     line-height: 2rem;
 }
 
+#drink-title {
+    font-family: 'Bitter', serif;
+    font-size: 35px;
+    
+}
