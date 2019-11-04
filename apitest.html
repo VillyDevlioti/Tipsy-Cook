@@ -32,55 +32,88 @@
 <body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top">
+    <div class="card" style="width: 25rem;">
+        <img class="drink card-img-top">
         <div class="card-body">
-            <p class="card-text"></p>
+            <p class="drink card-text"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 25rem;">
+        <img class="food card-img-top">
+        <div class="card-body">
+            <p class="food card-text"></p>
         </div>
     </div>
 
 
     <script>
 
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=caipirinha";
+        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response.drinks[0]);
+            // console.log(response.drinks[0]);
 
-            var img = $(".card-img-top").attr({
+            $(".drink").attr({
                 "src": response.drinks[0].strDrinkThumb,
                 "width": 200,
 
             })
-            $(".card-img-top").append(img);
+            // $(".drink").append(imgDrink);
 
-            $(".card-text").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
-            $(".card-text").append($("<p><strong>Ingredients:</strong></p>"))
+            $(".drink").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
+            $(".drink").append($("<p><strong>Ingredients:</strong></p>"))
 
             var cnt = 1;
             for (key in response.drinks[0]) {
                 if (key.indexOf("strIngredient") !== -1) {
                     if (response.drinks[0][key]) {
-                        console.log(key);
-                        appendElemToCard(response.drinks[0]["strMeasure" + cnt++] + " " + response.drinks[0][key]);
+                        // console.log(key);
+                        appendElemToCardDrink(response.drinks[0]["strMeasure" + cnt++] + " " + response.drinks[0][key]);
                     }
                 }
             }
 
-            $(".card-text").append($("<p>").text(response.drinks[0].strInstructions))
+            $(".drink").append($("<p>").text(response.drinks[0].strInstructions))
 
         });
 
-        function appendElemToCard(str) {
-            $(".card-text").append($("<p>").text(str));
+        function appendElemToCardDrink(str) {
+            $(".drink").append($("<p>").text(str));
         }
+        var queryURL2 = "https://www.themealdb.com/api/json/v1/1/random.php"
+        $.ajax({
+            url: queryURL2,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response)
 
+            $(".food").attr({
+                "src": response.meals[0].strMealThumb,
+                "width": 200,
 
+            })
+            $(".food").append($("<p id=\"food-title\">").text(response.meals[0].strMeal))
+            $(".food").append($("<p><strong>Ingredients:</strong></p>"))
+            
+            var cnt = 1;
+            for (key in response.meals[0]) {
+                if (key.indexOf("strIngredient") !== -1) {
+                    if (response.meals[0][key]) {
+                        // console.log(key);
+                        appendElemToCardFood(response.meals[0]["strMeasure" + cnt++] + " " + response.meals[0][key]);
+                    }
+                }
+            }
 
-
+            $(".food").append($("<p>").text(response.meals[0].strInstructions))
+            
+        })
+        function appendElemToCardFood(str) {
+            $(".food").append($("<p>").text(str));
+        }
 
 
     </script>
