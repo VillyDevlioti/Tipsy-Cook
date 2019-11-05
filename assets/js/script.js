@@ -41,9 +41,6 @@ $( document ).ready(function() {
             firstName: userFirstName,
             lastName: userLastName,
             email: userEmail,
-            question1: [],
-            question2: [],
-            question3: [],
           });
 
           database.ref('/user-data').on("value", function(snapshot) {
@@ -55,7 +52,9 @@ $( document ).ready(function() {
           }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
           });
-      
+
+          
+
     });
           
 
