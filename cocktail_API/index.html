@@ -13,25 +13,25 @@
 
     <script type="text/javascript">
         
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=manhattan";
+        var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=382e387c6f775bd0c85d17d888409d89&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&vote_average.gte=6&with_genres=28";
     
         $.ajax({
           url: queryURL,
           method: "GET"
         }).then(function (response) {
-          console.log(response.drinks[0]);
-          console.log("Drink name: " + response.drinks[0].strDrink);
-          console.log("This drink is " + response.drinks[0].strAlcoholic + " from the "+ response.drinks[0].strIBA + " cathegory" + ". It is also an " + response.drinks[0].strCategory)
-          console.log("You serve this puppy in a " + response.drinks[0].strGlass)
-          console.log("Instructions: " + response.drinks[0].strInstructions)  
-          console.log("Ingredients:")
-          console.log(response.drinks[0].strIngredient1)
-          console.log(response.drinks[0].strIngredient2)
-          console.log(response.drinks[0].strIngredient3)
-          console.log(response.drinks[0].strIngredient4)
-          console.log(response.drinks[0].strIngredient5)
-          console.log(response.drinks[0].strIngredient6)
-          console.log(response.drinks[0].strIngredient7)
+          console.log(response);
+          // console.log("Drink name: " + response.drinks[0].strDrink);
+          // console.log("This drink is " + response.drinks[0].strAlcoholic + " from the "+ response.drinks[0].strIBA + " cathegory" + ". It is also an " + response.drinks[0].strCategory)
+          // console.log("You serve this puppy in a " + response.drinks[0].strGlass)
+          // console.log("Instructions: " + response.drinks[0].strInstructions)  
+          // console.log("Ingredients:")
+          // console.log(response.drinks[0].strIngredient1)
+          // console.log(response.drinks[0].strIngredient2)
+          // console.log(response.drinks[0].strIngredient3)
+          // console.log(response.drinks[0].strIngredient4)
+          // console.log(response.drinks[0].strIngredient5)
+          // console.log(response.drinks[0].strIngredient6)
+          // console.log(response.drinks[0].strIngredient7)
 
         });
       </script>
