@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     console.log( "ready!" );
+    console.log("this variable is located on another script",a);
 
     //add firebase config to js
 

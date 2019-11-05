@@ -43,3 +43,11 @@ h1, h2 {
     font-family: 'Bitter', serif;
     font-size: 22px;
 }
+
+.btn-style {
+    margin: 1% 2%;
+}
+
+.question {
+    margin: 5% 0;
+}

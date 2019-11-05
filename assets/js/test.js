@@ -1,18 +1,26 @@
-var moods =["happy", "romantic", "sad"];
-var ingredients = ["tomato", "celery", "potato"];
+var moods =["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
+var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
+var moodSelection = ""; //user mood selection
+var ingredientsSelection = []; //user ingredients selection
 
+var a="hello";
 $( document ).ready(function() {
     console.log('it works!');
 
     $(".question").text("How are you feeling today?");
-    var newColumn = $(".button-row").append("<div class=\"col-md-3\">");
+    var newButton = $(".btn-style");
     console.log("column created");
     
     for (var i=0; i<moods.length; i++){
-        var newButton = newColumn.append("<button type=\"button\" class=\"btn btn-light\">"+moods[i]+"</button>");
+        newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button-"+i+"\" data-search=\""+moods[i]+"\">"+moods[i]+"</button>");
         console.log("new button created");
     }
     
+    $(".btn").on("click", function(){
+        moodSelection = $(this).attr("data-search");
+        console.log(moodSelection);
+
+    })
 
     //create global variables for question arrays
 
