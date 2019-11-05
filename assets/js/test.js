@@ -2,6 +2,8 @@ $( document ).ready(function() {
     console.log('it works!');
     var moods =["happy", "romantic", "sad"];
     var ingredients = ["tomato", "celery", "potato"];
+
+    $(".question").text("How are you feeling today?");
    
     
 
