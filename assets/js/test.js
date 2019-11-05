@@ -1,10 +1,17 @@
+var moods =["happy", "romantic", "sad"];
+var ingredients = ["tomato", "celery", "potato"];
+
 $( document ).ready(function() {
     console.log('it works!');
-    var moods =["happy", "romantic", "sad"];
-    var ingredients = ["tomato", "celery", "potato"];
 
     $(".question").text("How are you feeling today?");
-   
+    var newColumn = $(".button-row").append("<div class=\"col-md-3\">");
+    console.log("column created");
+    
+    for (var i=0; i<moods.length; i++){
+        var newButton = newColumn.append("<button type=\"button\" class=\"btn btn-light\">"+moods[i]+"</button>");
+        console.log("new button created");
+    }
     
 
     //create global variables for question arrays
@@ -30,4 +37,4 @@ $( document ).ready(function() {
         //grocerylist.html page to append ingregient lists based on
 
 
-)};
+});
