@@ -1,26 +1,49 @@
 var moods =["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
 var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
-var moodSelection = ""; //user mood selection
-var ingredientsSelection = []; //user ingredients selection
+var userSelection = ""; //user mood selection
 
 var a="hello";
 $( document ).ready(function() {
     console.log('it works!');
 
-    $(".question").text("How are you feeling today?");
-    var newButton = $(".btn-style");
-    console.log("column created");
-    
-    for (var i=0; i<moods.length; i++){
-        newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button-"+i+"\" data-search=\""+moods[i]+"\">"+moods[i]+"</button>");
-        console.log("new button created");
-    }
-    
-    $(".btn").on("click", function(){
-        moodSelection = $(this).attr("data-search");
-        console.log(moodSelection);
+    function initializeScreen() {
 
-    })
+        $(".question").text("How are you feeling today?");
+        var newButton = $(".btn-style");
+        console.log("column created");
+
+        initButtons(moods);
+        //initButtons(ingredients);
+
+    }
+
+    function initButtons (moods){
+        for (var i=0; i<moods.length; i++){
+            newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button-"+i+"\" data-search=\""+moods[i]+"\">"+moods[i]+"</button>");
+            console.log("new button created");
+        }
+        
+        $(".btn").on("click", function(){
+            userSelection = $(this).attr("data-search");
+            console.log(userSelection);
+
+        });
+
+    }    
+
+    function storeToDB (userEmail) {
+        
+    }
+
+/*     ref.child('users').orderByChild('email').equalTo('juan@gmail.com').on("value", function(snapshot) {
+        console.log(snapshot.val());
+        snapshot.forEach(function(data) {
+            console.log(data.key);
+        });
+    });
+
+    ref.child('users').orderByChild('email').equalTo('juan@gmail.com').exists() */
+    
 
     //create global variables for question arrays
 
