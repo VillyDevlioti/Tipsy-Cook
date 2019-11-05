@@ -53,7 +53,8 @@ $( document ).ready(function() {
             console.log("The read failed: " + errorObject.code);
           });
 
-          
+          $(location).attr('href', 'test.html')
+
 
     });
           

@@ -19,7 +19,7 @@ $( document ).ready(function() {
 
     function initButtons (moods){
         for (var i=0; i<moods.length; i++){
-            newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button-"+i+"\" data-search=\""+moods[i]+"\">"+moods[i]+"</button>");
+            newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" data-search=\""+moods[i]+"\">"+moods[i]+"</button>");
             console.log("new button created");
         }
         
@@ -34,6 +34,7 @@ $( document ).ready(function() {
     function storeToDB (userEmail) {
         
     }
+    initializeScreen();
 
 /*     ref.child('users').orderByChild('email').equalTo('juan@gmail.com').on("value", function(snapshot) {
         console.log(snapshot.val());
