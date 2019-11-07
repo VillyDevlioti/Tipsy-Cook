@@ -44,8 +44,6 @@ $(document).ready(function () {
 		userLastName = $("#sign-in-last-name-input").val().trim();
 		userEmail = $("#sign-in-email-input").val().trim();
 
-		var database = firebase.database();
-
 		//create onclick event for user submitting user information
 		$("#submit-button").on("click", function (event) {
 			event.preventDefault();
