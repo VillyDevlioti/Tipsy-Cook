@@ -13,7 +13,9 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-
+var moods =["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
+var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
+var userSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
 var userEmail="";
