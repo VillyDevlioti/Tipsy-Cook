@@ -46,3 +46,30 @@ h1, h2 {
 .question {
     margin: 5% 0;
 }
+
+#module {
+    width: 500px;
+}
+
+#module p.collapse[aria-expanded="false"] {
+    display: block;
+    height: 40px !important;
+    overflow: hidden;
+}
+
+#module p.collapsing[aria-expanded="false"] {
+    height: 40px !important;
+}
+
+#module a.collapsed:after {
+    content: '+ Show More';
+}
+
+#module a:not(.collapsed):after {
+    content: '- Show Less';
+}
+
+#clickCollapse {
+    color: #E4572E;
+    float: right;
+}
