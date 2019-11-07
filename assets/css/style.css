@@ -20,7 +20,7 @@ h2 {
     font-size: 24px;
 }
 
-h1, h2 {
+h1, h2, #about-p {
     color: white;
     margin: 5% 0;
 }
@@ -47,6 +47,7 @@ h1, h2 {
     margin: 5% 0;
 }
 
+
 #module {
     width: 500px;
 }
@@ -72,4 +73,27 @@ h1, h2 {
 #clickCollapse {
     color: #E4572E;
     float: right;
+
+#about {
+    margin-top: -8em;
+}
+
+.about-section {
+    font-family: 'Bitter', serif;
+    font-size: 36px;
+    margin-bottom: -0.5em;
+}
+
+.navbar-brand {
+    font-family: 'Bitter', serif;
+    font-size: 24px;
+}
+
+#random {
+    color: white;
+}
+
+#random:hover {
+    color: #212529;
+    text-decoration: none;
 }
