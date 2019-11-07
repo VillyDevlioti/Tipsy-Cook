@@ -16,14 +16,10 @@ var database = firebase.database();
 $( document ).ready(function() {
   console.log( "ready!" );
   console.log("this variable is located on another script",a);
-
-<<<<<<< HEAD
-    //add firebase config to js
-    var userFirstName="";
-    var userLastName="";
-    var userEmail="";
-=======
-  //add firebase config to js
+  
+  var userFirstName="";
+  var userLastName="";
+  var userEmail="";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAYjn5bhv-pJ30tAvcuvax55A8tf-zM5zA",
@@ -38,7 +34,6 @@ $( document ).ready(function() {
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
->>>>>>> 74b62b8c0106c3a666980988d35c7e5d4d5ff849
 
   var database = firebase.database();
 
@@ -52,16 +47,24 @@ $( document ).ready(function() {
     var indexat = userEmail.indexOf("@"); //Index of "@" in the email field
     var indexdot = userEmail.indexOf("."); //Index of "." in the email field
 
-<<<<<<< HEAD
     $("#submit-button").on("click", function(event) {
         event.preventDefault();
         // Get the input values
         userFirstName = $("#sign-in-name-input").val().trim();
         userLastName = $("#sign-in-last-name-input").val().trim();
         userEmail = $("#sign-in-email-input").val().trim();
-        
-=======
->>>>>>> 74b62b8c0106c3a666980988d35c7e5d4d5ff849
+
+  var database = firebase.database();
+
+  //create onclick event for user submitting user information
+  $("#submit-button").on("click", function(event) {
+    event.preventDefault();
+    // Get the input values
+    var userFirstName = $("#sign-in-first-name-input").val().trim();
+    var userLastName = $("#sign-in-last-name-input").val().trim();
+    var userEmail = $("#sign-in-email-input").val().trim();
+    var indexat = userEmail.indexOf("@"); //Index of "@" in the email field
+    var indexdot = userEmail.indexOf("."); //Index of "." in the email field
       
     //Validation of form. The function will display message if input field is blank or incorrect
     if (userFirstName == "") {
@@ -101,27 +104,13 @@ $( document ).ready(function() {
       }, function(errorObject) {
           console.log("The read failed: " + errorObject.code);
         });
-          
-<<<<<<< HEAD
-            // If any errors are experienced, log them to console.
-          }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-          });
-
-          var userEmailLocal = userEmail; //local user email storage to preserve on load
+      
+      var userEmailLocal = userEmail; //local user email storage to preserve on load
           localStorage.setItem("userEmail", userEmail);
-
-
-          $(location).attr('href', 'test.html')
-
-
-    });
           
-=======
       $(location).attr('href', 'test.html');
         
     };
->>>>>>> 74b62b8c0106c3a666980988d35c7e5d4d5ff849
 
   });  
   
