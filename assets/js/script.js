@@ -13,36 +13,14 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+
+var userFirstName = "";
+var userLastName = "";
+var userEmail="";
+
 $(document).ready(function () {
 	console.log("ready!");
 	console.log("this variable is located on another script", a);
-
-	var userFirstName = "";
-	var userLastName = "";
-	var userEmail = "";
-
-	var firebaseConfig = {
-		apiKey: "AIzaSyAYjn5bhv-pJ30tAvcuvax55A8tf-zM5zA",
-		authDomain: "tipsy-cook.firebaseapp.com",
-		databaseURL: "https://tipsy-cook.firebaseio.com",
-		projectId: "tipsy-cook",
-		storageBucket: "tipsy-cook.appspot.com",
-		messagingSenderId: "1032674956518",
-		appId: "1:1032674956518:web:8ed72d729a683d8eb95727",
-		measurementId: "G-936JM5P6LQ"
-	};
-
-	// Initialize Firebase
-	firebase.initializeApp(firebaseConfig);
-
-	var database = firebase.database();
-
-	$("#submit-button").on("click", function (event) {
-		event.preventDefault();
-		// Get the input values
-		userFirstName = $("#sign-in-name-input").val().trim();
-		userLastName = $("#sign-in-last-name-input").val().trim();
-		userEmail = $("#sign-in-email-input").val().trim();
 
 		//create onclick event for user submitting user information
 		$("#submit-button").on("click", function (event) {
@@ -93,23 +71,19 @@ $(document).ready(function () {
 					console.log("The read failed: " + errorObject.code);
 				});
 
-				var userEmailLocal = userEmail; //local user email storage to preserve on load
-				localStorage.setItem("userEmail", userEmail);
+      }; 
 
-				$(location).attr('href', 'test.html');
 
-			};
-
-		});
-
+    });
+    
+    
+/* 
 		//on.click event when user clicks "feeling lucky" button that will bring them to a random page.
 		$("#random").on("click", function (event) {
 			$(location).attr('href', 'test.html'); // need to create random html and fix link here!
 		});
-	
+	 */
 
-	})
-
-})
+});
 
 
