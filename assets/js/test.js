@@ -3,10 +3,11 @@ var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
 var userSelection = ""; //user mood selection
 
 var a="hello";
+userEmail = localStorage.getItem("userEmail");
+console.log(userEmail);
+
 $( document ).ready(function() {
     console.log('it works!');
-
-    function initializeScreen() {
 
         $(".question").text("How are you feeling today?");
         var newButton = $(".btn-style");
@@ -15,7 +16,6 @@ $( document ).ready(function() {
         initButtons(moods);
         //initButtons(ingredients);
 
-    }
 
     function initButtons (moods){
         for (var i=0; i<moods.length; i++){
@@ -29,12 +29,17 @@ $( document ).ready(function() {
 
         });
 
+        storeToDB (userSelection,userEmail);
+
     }    
 
-    function storeToDB (userEmail) {
+    function storeToDB (userSelection, userEmail) {
+
+        if (database.ref.child('user-data').orderByChild('email').equalTo(userEmail).exists()) {
+            console.log("exists!");
+        }
         
     }
-    initializeScreen();
 
 /*     ref.child('users').orderByChild('email').equalTo('juan@gmail.com').on("value", function(snapshot) {
         console.log(snapshot.val());
