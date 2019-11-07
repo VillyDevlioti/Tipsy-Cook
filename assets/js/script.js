@@ -22,7 +22,6 @@ $(document).ready(function () {
 	console.log("ready!");
 	console.log("this variable is located on another script", a);
 
-
 		//create onclick event for user submitting user information
 		$("#submit-button").on("click", function (event) {
 			event.preventDefault();
@@ -78,13 +77,13 @@ $(document).ready(function () {
     });
     
     
-
-/* 		//on.click event when user clicks "feeling lucky" button that will bring them to a random page.
+/* 
+		//on.click event when user clicks "feeling lucky" button that will bring them to a random page.
 		$("#random").on("click", function (event) {
 			$(location).attr('href', 'test.html'); // need to create random html and fix link here!
-		}); */
-	
+		});
+	 */
 
-})
+});
 
 
