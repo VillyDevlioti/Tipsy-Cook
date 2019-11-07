@@ -75,6 +75,10 @@ $(document).ready(function () {
 
       }; 
 
+      //After we click on submit button, we want the user to be presented with the moods
+
+      //Call initialize Mood Test
+      initializeMoodTest();
 
     });
     
@@ -86,6 +90,31 @@ $(document).ready(function () {
 		});
 	 */
 
+//function to show test questions
+function initializeMoodTest ()
+{
+  $(".question").text("How are you feeling today?");
+        var newButton = $(".btn-style");
+        console.log("column created");
+
+        initButtons(moods);
+}
+
+function initButtons (arr){
+  for (var i=0; i<arr.length; i++){
+      newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
+      console.log("new button created");
+  }
+  
+  $(".btn").on("click", function(){
+      userSelection = $(this).attr("data-search");
+      console.log(userSelection);
+
+  });
+
+  //now we need to check firebase for email in order to assign the user selection to the right user. 
+
 });
+
 
 
