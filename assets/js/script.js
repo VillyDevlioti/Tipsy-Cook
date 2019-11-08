@@ -19,10 +19,10 @@ var userSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
 var userEmail="";
+var newButton;
 
 $(document).ready(function () {
 	console.log("ready!");
-	console.log("this variable is located on another script", a);
 
 		//create onclick event for user submitting user information
 		$("#submit-button").on("click", function (event) {
@@ -55,7 +55,8 @@ $(document).ready(function () {
 				// Log the user information
 				console.log(userFirstName);
 				console.log(userLastName);
-				console.log(userEmail);
+        console.log(userEmail);
+        
 
 				// Save the new user info in Firebase.
 				database.ref('/user-data').push({
@@ -71,14 +72,16 @@ $(document).ready(function () {
 					// If any errors are experienced, log them to console.
 				}, function (errorObject) {
 					console.log("The read failed: " + errorObject.code);
-				});
+        });
+        
+    
+        initializeMoodTest();
 
       }; 
 
       //After we click on submit button, we want the user to be presented with the moods
 
       //Call initialize Mood Test
-      initializeMoodTest();
 
     });
     
@@ -93,11 +96,15 @@ $(document).ready(function () {
 //function to show test questions
 function initializeMoodTest ()
 {
-  $(".question").text("How are you feeling today?");
-        var newButton = $(".btn-style");
+  $(".headline").remove();
+  $("#carousel").css("display","block");
+  $(".modal").remove();
+  $("#question-1").text("How are you feeling today?");
+        newButton = $(".btn-style");
         console.log("column created");
 
         initButtons(moods);
+        
 }
 
 function initButtons (arr){
@@ -110,9 +117,17 @@ function initButtons (arr){
       userSelection = $(this).attr("data-search");
       console.log(userSelection);
 
+
+
   });
 
   //now we need to check firebase for email in order to assign the user selection to the right user. 
+  if (database.ref.child('/user-data').orderByChild('email').equalTo(userEmail).exists()) {
+    //go to the specific user and assign the mood
+    console.log(database.ref('/user-data').orderByChild('email').equalTo(userEmail).exists())
+  }
+
+}
 
 });
 
