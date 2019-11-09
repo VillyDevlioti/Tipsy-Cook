@@ -97,3 +97,7 @@ h1, h2, #about-p {
     color: #E4572E;
     float: right;
 }
+
+.modal-backdrop.show {
+    opacity: 0;
+}
