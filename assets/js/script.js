@@ -39,6 +39,7 @@ $(document).ready(function () {
 			$("#sign-in-first-name-input").focus();
 			$("#custom-feedback-1").css("display", "block");
 			event.preventDefault();
+
 			event.stopPropagation();
 		} else if (userLastName == "") {
 			$("#sign-in-last-name-input").focus();
@@ -111,35 +112,29 @@ $(document).ready(function () {
 
 	}
 
-	function initButtons(arr) {
-		for (var i = 0; i < arr.length; i++) {
-			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" data-search=\"" + arr[i] + "\">" + arr[i] + "</button>");
-			console.log("new button created");
-		}
+function initButtons (arr, email){
+  for (var i=0; i<arr.length; i++){
+      newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
+      console.log("new button created");
+  }
+  
+  $("#mood-button").on("click", function(){
+	userSelection = $(this).attr("data-search");
+	console.log(email);
 
-		$(".btn").on("click", function () {
-			userSelection = $(this).attr("data-search");
-			console.log(userSelection);
+});
 
-			console.log("Checking if it exists!");
-			/* 	  //now we need to check firebase for email in order to assign the user selection to the right user. 
-			/* 		database.ref("/user-data").orderByChild("email").equalTo(userEmail).once("value",snapshot => {
-					  if (snapshot.exists()){
-							const userData = snapshot.val();
-						  console.log("exists!", userData);
-						  //go to the specific user and assign the mood
-			  /* 			database.ref('/user-data/email').set({
-							  mood: userSelection  
-					  }) 
-				  }
-				  }); 
-			
-			  }); */
+console.log(email);
 
-		});
-
-
-	}
+//now we need to check firebase for email in order to assign the user selection to the right user. 
+  let usersRef = database.ref('/user-data');
+	usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
+		  console.log(snapshot.val());
+		  snapshot.forEach(function(data) {
+		  console.log("data key:", data.key);
+	  });
+  }); 
+	
 
 });
 
