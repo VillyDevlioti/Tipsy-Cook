@@ -134,21 +134,37 @@ function initButtons (arr, email){
 		});
 
 
-//now we need to check firebase for email in order to assign the user selection to the right user. 
-  let usersRef = database.ref('user-data');
-	usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
-		  console.log(snapshot.val());
-		  snapshot.forEach(function(data) {
-		  console.log("data key:", data.key);
-	  });
-  }); 
+		//now we need to check firebase for email in order to assign the user selection to the right user. 
+		let usersRef = database.ref('user-data');
+		var dataKey;
+		usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
+			console.log(snapshot.val());
+			snapshot.forEach(function(data) {
+			console.log("data key:", data.key);
+			dataKey=data.key;
+			console.log(dataKey);
+			});
+		}); 
+		
+		//assign mood value to database
+		console.log("before assigning")
+		usersRef.child(dataKey).update({
+			mood: userSelection
+		});
+		console.log("after assigning");
+	
+
+		//print out to check whether it works
+		database.ref('/user-data').on("value", function (snapshot) {
+			console.log(snapshot.val());
+			// If any errors are experienced, log them to console.
+			}, function (errorObject) {
+		console.log("The read failed: " + errorObject.code);
+});
+
+});
 
 }
-
-		
-
-
-	}
 	
 });
 
