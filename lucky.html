@@ -163,9 +163,11 @@
         }
         //19 genres array:
         var genresArray = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37]
-        var randomGenre = Math.floor(Math.random() * 20);
+        var randomGenre = Math.floor(Math.random() * 19);
         var genreLucky = genresArray[randomGenre];
+        console.log(genreLucky);
         var ResultPageMovie = Math.floor(Math.random() * 50);
+        console.log(ResultPageMovie)
         var queryURL3 = "https://api.themoviedb.org/3/discover/movie?api_key=382e387c6f775bd0c85d17d888409d89&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + ResultPageMovie + "&vote_average.gte=6&with_genres=" + genreLucky;
         $.ajax({
             url: queryURL3,
