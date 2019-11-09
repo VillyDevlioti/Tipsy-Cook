@@ -146,6 +146,8 @@
                 "width": 200,
             })
             $(".movie").append($("<p id=\"movie-title\">").text(response.results[0].title))
+            $(".movie").append($("<p><strong>Release Date:</strong></p>"))
+            $(".movie").append($("<p>").text(response.results[0].release_date))
             $(".movie").append($("<p><strong>Overview:</strong></p>"))
             $(".movie").append($("<p>").text(response.results[0].overview))
 
