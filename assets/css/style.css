@@ -39,6 +39,11 @@ h1, h2, #about-p {
     font-size: 22px;
 }
 
+.result-title {
+    margin: 0.5em;
+    padding-bottom: 0;
+}
+
 .btn-style {
     margin: 1% 2%;
 }
@@ -105,3 +110,4 @@ h1, h2, #about-p {
 .carousel {
     display: none;
 }
+

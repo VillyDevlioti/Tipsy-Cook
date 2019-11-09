@@ -176,7 +176,7 @@
                     }
                 }
             }
-            var pInstructions = $("<p>").addClass("collapse").attr("aria-expanded", false).attr("id", "collapseExample");
+            var pInstructions = $("<p>");
             $(".food").append(pInstructions.text(response.meals[0].strInstructions))
 
         })
