@@ -97,7 +97,7 @@ $(document).ready(function () {
 	//function to show test questions
 
 	function initializeMoodTest(userEmail) {
-		$("#sign-in-nav").text("Sign Out");
+		$("#nav-sign-in").text("Sign Out");
 		$(".nav-link").removeClass("disabled");
 		$("#sign-in-li").removeClass("active");
 		$("#sign-in-li").addClass("nav-sign-out");
