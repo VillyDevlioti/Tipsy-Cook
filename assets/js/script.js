@@ -205,7 +205,7 @@ $(document).ready(function () {
 		}
 
 		//grab food ingredient
-		$("#food-button").on("click", function{
+		$("#food-button").on("click", function() {
 
 		});
 	}
