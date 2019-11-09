@@ -94,10 +94,12 @@ $(document).ready(function () {
 		 */
 
 	//function to show test questions
+
 	function initializeMoodTest(userEmail) {
 		$("#sign-in-nav").text("Sign Out");
 		$(".nav-link").removeClass("disabled");
 		$("#sign-in-li").removeClass("active");
+		$("#sign-in-li").addClass("nav-sign-out");
 		$("#nav-mood").addClass("active");
 		$(".headline").remove();
 		$(".carousel").css("display", "block");
@@ -112,6 +114,7 @@ $(document).ready(function () {
 
 	}
 
+
 function initButtons (arr, email){
   for (var i=0; i<arr.length; i++){
       newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
@@ -123,9 +126,13 @@ function initButtons (arr, email){
 	console.log(email);
 	console.log(userSelection);
 
-});
 
-console.log(email);
+		$("#mood-button").on("click", function () {
+			userSelection = $(this).attr("data-search");
+			console.log(email);
+
+		});
+
 
 //now we need to check firebase for email in order to assign the user selection to the right user. 
   let usersRef = database.ref('user-data');
@@ -138,6 +145,11 @@ console.log(email);
 
 }
 
+		
+
+
+	}
+	
 });
 
 
