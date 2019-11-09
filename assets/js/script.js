@@ -14,13 +14,13 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 var moods = ["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
-var ingredients = ["tomato", "celery", "potato", "lemon", "steak"]; //predefined ingredients
+var ingredients = ["tomato", "celery", "potato", "lemon", "steak", "gin", "vodka", "whiskey"]; //predefined ingredients
 var userSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
 var userEmail = "";
 var newButton;
-var userMoods=[];
+var userFoods=[];
 
 $(document).ready(function () {
 	console.log("ready!");
@@ -200,13 +200,18 @@ $(document).ready(function () {
 	function initIngredientButtons(arr, userEmail) {
 
 		for (var i=0; i<arr.length; i++){
-			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"food-button\" data-search=\""+arr[i]+"\" data-toggle=\"button\" aria-pressed=\"false\">"+arr[i]+"</button>");
+			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style food-button\" data-search=\""+arr[i]+"\" data-toggle=\"button\" aria-pressed=\"false\">"+arr[i]+"</button>");
 			console.log("new button created");
 		}
-
 		//grab food ingredient
-		$("#food-button").on("click", function() {
-
+		$(".food-button").on("click", function() {
+			var attrib = $(this).attr("data-search");
+			console.log(attrib);
+			userFoods.push(attrib);
+			console.log(userFoods);
+/* 			userSelection = $(this).attr("data-search");
+			console.log(email);
+			console.log(userSelection);	 */		
 		});
 	}
 });
