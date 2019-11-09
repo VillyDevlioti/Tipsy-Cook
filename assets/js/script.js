@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var moods = ["Happy", "Romantic", "Sad", "Optimistic", "Tired"]; //predefined moods 
+var moods = ["Happy", "Romantic", "Sad", "Optimistic", "Tired", "Mysterious"]; //predefined moods 
 var ingredients = ["Tomato", "Celery", "Potato", "Lemon", "Steak", "Gin", "Vodka", "Whiskey"]; //predefined ingredients
 var userSelection = ""; //user mood selection
 var userFirstName = "";
@@ -118,53 +118,46 @@ $(document).ready(function () {
 	//initiliazing mood buttons
 	function initMoodButtons (arr, email){
 		for (var i=0; i<arr.length; i++){
-			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
+			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
 			console.log("new button created");
 		}
 	
 		//get user selection from the buttons
-		$(".btn").on("click", function(){
+		$(".mood-button").on("click", function(){
 			userSelection = $(this).attr("data-search");
 			console.log(email);
 			console.log(userSelection);
 
 
-				$("#mood-button").on("click", function () {
-					userSelection = $(this).attr("data-search");
-					console.log(email);
-
+			//now we need to check firebase for email in order to assign the user selection to the right user. 
+			let usersRef = database.ref('user-data');
+			var dataKey;
+			usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
+				console.log(snapshot.val());
+				snapshot.forEach(function(data) {
+				console.log("data key:", data.key);
+				dataKey=data.key;
+				console.log(dataKey);
 				});
-
-
-				//now we need to check firebase for email in order to assign the user selection to the right user. 
-				let usersRef = database.ref('user-data');
-				var dataKey;
-				usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
-					console.log(snapshot.val());
-					snapshot.forEach(function(data) {
-					console.log("data key:", data.key);
-					dataKey=data.key;
-					console.log(dataKey);
-					});
-				}); 
+			}); 
 				
-				//assign mood value to database
-				console.log("before assigning")
-				usersRef.child(dataKey).update({
-					mood: userSelection
-				});
-				console.log("after assigning");
+			//assign mood value to database
+			console.log("before assigning")
+			usersRef.child(dataKey).update({
+				mood: userSelection
+			});
+			console.log("after assigning");
 			
 
-				//print out to check whether it works
-				database.ref('/user-data').on("value", function (snapshot) {
-					console.log(snapshot.val());
-					// If any errors are experienced, log them to console.
-					}, function (errorObject) {
-				console.log("The read failed: " + errorObject.code);
-				});
-
+			//print out to check whether it works
+			database.ref('/user-data').on("value", function (snapshot) {
+				console.log(snapshot.val());
+				// If any errors are experienced, log them to console.
+				}, function (errorObject) {
+			console.log("The read failed: " + errorObject.code);
 			});
+
+		});
 
 	}
 
@@ -197,7 +190,7 @@ $(document).ready(function () {
 		
 	}
 
-	function initIngredientButtons(arr, userEmail) {
+	function initIngredientButtons(arr, email) {
 
 		for (var i=0; i<arr.length; i++){
 			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style food-button\" data-search=\""+arr[i]+"\" data-toggle=\"button\" aria-pressed=\"false\">"+arr[i]+"</button>");
@@ -209,10 +202,43 @@ $(document).ready(function () {
 			console.log(attrib);
 			userFoods.push(attrib);
 			console.log(userFoods);
-/* 			userSelection = $(this).attr("data-search");
-			console.log(email);
-			console.log(userSelection);	 */		
+
+			//and store to database under the correct user ID
+			//first looking for the correct ID
+			let usersRef = database.ref('user-data');
+			var dataKey;
+			usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
+				console.log(snapshot.val());
+				snapshot.forEach(function(data) {
+				console.log("data key:", data.key);
+				dataKey=data.key;
+				console.log(dataKey);
+				});
+			}); 
+
+			console.log("before assigning")
+			for (var i=0; i<userFoods.legth; i++) {
+				usersRef.child(dataKey).update({
+				food: userFoods[i]
+			});
+			//assign food value to database
+			
+			}
+			console.log("after assigning");
+			
+
+			//print out to check whether it works
+			database.ref('/user-data').on("value", function (snapshot) {
+				console.log(snapshot.val());
+				// If any errors are experienced, log them to console.
+				}, function (errorObject) {
+			console.log("The read failed: " + errorObject.code);
+			});
+ 
+
+
 		});
+
 	}
 });
 
