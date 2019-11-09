@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 var moods = ["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
-var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
+var ingredients = ["tomato", "celery", "potato", "lemon", "steak"]; //predefined ingredients
 var userSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
@@ -111,12 +111,12 @@ $(document).ready(function () {
 		$("#question-1").text("How are you feeling today?");
 		newButton = $(".btn-style");
 		console.log("column created");
-		initButtons(moods, userEmail);
+		initMoodButtons(moods, userEmail);
 
 	}
 
 	//initiliazing mood buttons
-	function initButtons (arr, email){
+	function initMoodButtons (arr, email){
 		for (var i=0; i<arr.length; i++){
 			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
 			console.log("new button created");
@@ -186,13 +186,23 @@ $(document).ready(function () {
 		$(".modal-backdrop").remove();
 		$(".modal").remove();
 		$("#question-1").remove();
-		$(".btn-style").remove();
+		$(".btn-style").empty();
 		$(".carousel-item-2").addClass("active");
 		console.log("Class added");
 		console.log("Inside the initializeIngredients");
 		$("#question-2").text("What do you have in your fridge?");
-
+		newButton = $(".btn-style");
+		console.log("column created");
+		initIngredientButtons(ingredients, userEmail);
 		
+	}
+
+	function initIngredientButtons(arr, userEmail) {
+
+		for (var i=0; i<arr.length; i++){
+			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"food-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
+			console.log("new button created");
+		}
 	}
 });
 
