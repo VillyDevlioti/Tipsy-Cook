@@ -200,12 +200,21 @@ $(document).ready(function () {
 	function initIngredientButtons(arr, userEmail) {
 
 		for (var i=0; i<arr.length; i++){
-			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"food-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
+			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"food-button\" data-search=\""+arr[i]+"\" data-toggle=\"button\" aria-pressed=\"false\">"+arr[i]+"</button>");
 			console.log("new button created");
 		}
+
+		//grab food ingredient
+		$("#food-button").on("click", function() {
+
+		});
 	}
 });
 
+
+//<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+//Single toggle
+//</button>
 
 
 
