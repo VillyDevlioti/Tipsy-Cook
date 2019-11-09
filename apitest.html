@@ -81,89 +81,110 @@
     </div>
 
     <script>
-
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
-
+        //Replace Gin with user's liquor in pantry:
+        var queryURLInPantry = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin";
         $.ajax({
-            url: queryURL,
+            url: queryURLInPantry,
             method: "GET"
         }).then(function (response) {
-            // console.log(response.drinks[0]);
+            var randomCocktailID = Math.floor(Math.random() * 81);
+            var randomID = response.drinks[randomCocktailID].idDrink
 
-            $(".drink").attr({
-                "src": response.drinks[0].strDrinkThumb,
-                "width": 200,
+            var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + randomID
 
-            })
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                $(".drink").attr({
+                    "src": response.drinks[0].strDrinkThumb,
+                    "width": 200,
 
-            $(".drink").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
-            $(".drink").append($("<p><strong>Ingredients:</strong></p>"))
+                })
 
-            var cnt = 1;
-            for (key in response.drinks[0]) {
-                if (key.indexOf("strIngredient") !== -1) {
-                    if (response.drinks[0][key]) {
-                        // console.log(key);
-                        appendElemToCardDrink(response.drinks[0]["strMeasure" + cnt++] + " " + response.drinks[0][key]);
+                $(".drink").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
+                $(".drink").append($("<p><strong>Ingredients:</strong></p>"))
+
+                var cnt = 1;
+                for (key in response.drinks[0]) {
+                    if (key.indexOf("strIngredient") !== -1) {
+                        if (response.drinks[0][key]) {
+                            appendElemToCardDrink(response.drinks[0]["strMeasure" + cnt++] + " " + response.drinks[0][key]);
+                        }
                     }
                 }
-            }
 
-            $(".drink").append($("<p>").text(response.drinks[0].strInstructions))
+                $(".drink").append($("<p>").text(response.drinks[0].strInstructions))
 
+            });
         });
 
         function appendElemToCardDrink(str) {
             $(".drink").append($("<p>").text(str));
         }
-        var queryURL2 = "https://www.themealdb.com/api/json/v1/1/random.php"
+
+        // Replace beef with user's ingerdient in pantry (only one ingredient)
+        var queryURLMealIngredient = "https://www.themealdb.com/api/json/v1/1/filter.php?i=beef"
         $.ajax({
-            url: queryURL2,
+            url: queryURLMealIngredient,
             method: "GET"
         }).then(function (response) {
-            console.log(response)
-            $(".food").attr({
-                "src": response.meals[0].strMealThumb,
-                "width": 200,
+            console.log(response);
+            var randomMeal = Math.floor(Math.random() * 8);
+            console.log(randomMeal);
+            var randomIDFood = response.meals[randomMeal].idMeal
+            console.log(randomIDFood);
 
-            })
-            var pMeal = $("<p>").addClass("collapse").attr("aria-expanded", false);
-            $(".food").append($("<p id=\"food-title\">").text(response.meals[0].strMeal))
-            $(".food").append($("<p><strong>Ingredients:</strong></p>"))
 
-            var cnt = 1;
-            for (key in response.meals[0]) {
-                if (key.indexOf("strIngredient") !== -1) {
-                    if (response.meals[0][key]) {
-                        // console.log(key);
-                        appendElemToCardFood(response.meals[0]["strMeasure" + cnt++] + " " + response.meals[0][key]);
+
+            var queryURL2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + randomIDFood
+            $.ajax({
+                url: queryURL2,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response)
+                $(".food").attr({
+                    "src": response.meals[0].strMealThumb,
+                    "width": 200,
+
+                })
+                var pMeal = $("<p>").addClass("collapse").attr("aria-expanded", false);
+                $(".food").append($("<p id=\"food-title\">").text(response.meals[0].strMeal))
+                $(".food").append($("<p><strong>Ingredients:</strong></p>"))
+
+                var cnt = 1;
+                for (key in response.meals[0]) {
+                    if (key.indexOf("strIngredient") !== -1) {
+                        if (response.meals[0][key]) {
+                            appendElemToCardFood(response.meals[0]["strMeasure" + cnt++] + " " + response.meals[0][key]);
+                        }
                     }
                 }
-            }
-            var pInstructions = $("<p>").addClass("collapse").attr("aria-expanded", false).attr("id", "collapseExample");
-            $(".food").append(pInstructions.text(response.meals[0].strInstructions))
-            var a = $("<a id=\"clickCollapse\">").text("Instructions").attr({
-                "data-toggle": "collapse",
-                "aria-expandedir": "false",
-                "aria-controls": "collapseExample",
-                "href": "#collapseExample",
-                "role": "button"
-            }).addClass("collapsed")
+                var pInstructions = $("<p>").addClass("collapse").attr("aria-expanded", false).attr("id", "collapseExample");
+                $(".food").append(pInstructions.text(response.meals[0].strInstructions))
+                var a = $("<a id=\"clickCollapse\">").text("Instructions").attr({
+                    "data-toggle": "collapse",
+                    "aria-expandedir": "false",
+                    "aria-controls": "collapseExample",
+                    "href": "#collapseExample",
+                    "role": "button"
+                }).addClass("collapsed")
 
-            $(".food").append(a);
+                $(".food").append(a);
 
-        })
+            })
+        });
         function appendElemToCardFood(str) {
             $(".food").append($("<p>").text(str));
         }
 
-
-        var queryURL3 = "https://api.themoviedb.org/3/discover/movie?api_key=382e387c6f775bd0c85d17d888409d89&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=6&vote_average.gte=6&with_genres=9648";
+        var randomMoviePage = Math.floor(Math.random() * 81);
+        //replace genres = .... by user's choice of genre
+        var queryURL3 = "https://api.themoviedb.org/3/discover/movie?api_key=382e387c6f775bd0c85d17d888409d89&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + randomMoviePage + "&vote_average.gte=6&with_genres=9648";
         $.ajax({
             url: queryURL3,
             method: "GET"
         }).then(function (response) {
-            // console.log(response);
 
             $(".movie").attr({
                 "src": "https://image.tmdb.org/t/p/w500" + response.results[0].backdrop_path,
