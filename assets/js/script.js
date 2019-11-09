@@ -81,7 +81,7 @@ $(document).ready(function () {
 
 		//Call initialize Mood Test
 		console.log("Initializing buttons")
-		initializeMoodTest();
+		initializeMoodTest(userEmail);
 
 	});
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
 		 */
 
 	//function to show test questions
-	function initializeMoodTest() {
+	function initializeMoodTest(userEmail) {
 		$("#sign-in-nav").text("Sign Out");
 		$(".nav-link").removeClass("disabled");
 		$("#sign-in-li").removeClass("active");
@@ -108,7 +108,7 @@ $(document).ready(function () {
 		$("#question-1").text("How are you feeling today?");
 		newButton = $(".btn-style");
 		console.log("column created");
-		//initButtons(moods);
+		initButtons(moods, userEmail);
 
 	}
 
@@ -118,23 +118,25 @@ function initButtons (arr, email){
       console.log("new button created");
   }
   
-  $("#mood-button").on("click", function(){
+  $(".btn").on("click", function(){
 	userSelection = $(this).attr("data-search");
 	console.log(email);
+	console.log(userSelection);
 
 });
 
 console.log(email);
 
 //now we need to check firebase for email in order to assign the user selection to the right user. 
-  let usersRef = database.ref('/user-data');
+  let usersRef = database.ref('user-data');
 	usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
 		  console.log(snapshot.val());
 		  snapshot.forEach(function(data) {
 		  console.log("data key:", data.key);
 	  });
   }); 
-	
+
+}
 
 });
 
