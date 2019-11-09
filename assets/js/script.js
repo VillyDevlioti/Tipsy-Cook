@@ -191,7 +191,7 @@ $(document).ready(function () {
 		console.log("Class added");
 		console.log("Inside the initializeIngredients");
 		$("#question-2").text("What do you have in your fridge?");
-		newButton = $(".btn-style");
+		newButton = $(".btn-food");
 		console.log("column created");
 		initIngredientButtons(ingredients, userEmail);
 		
