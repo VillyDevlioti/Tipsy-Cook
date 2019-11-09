@@ -20,6 +20,7 @@ var userFirstName = "";
 var userLastName = "";
 var userEmail = "";
 var newButton;
+var userMoods=[];
 
 $(document).ready(function () {
 	console.log("ready!");
@@ -82,7 +83,6 @@ $(document).ready(function () {
 		//Call initialize Mood Test
 		console.log("Initializing buttons")
 		initializeMoodTest(userEmail);
-		//initializeIngredients(userEmail);
 
 	});
 
@@ -168,8 +168,30 @@ $(document).ready(function () {
 
 	}
 
+	//when a users clicks the next slide on the carousel, then initialize the ingredients function
+	$(".carousel-control-next").on("click", function(){
+		initializeIngredients(userEmail);
+		console.log("Calling the second question");
+	});
+
 	//Initialize Ingredients
 	function initializeIngredients(userEmail){
+		$("#sign-in-nav").text("Sign Out");
+		$(".nav-link").removeClass("disabled");
+		$("#sign-in-li").removeClass("active");
+		$("#sign-in-li").addClass("nav-sign-out");
+		$("#nav-mood").addClass("active");
+		$(".headline").remove();
+		$(".carousel").css("display", "block");
+		$(".modal-backdrop").remove();
+		$(".modal").remove();
+		$("#question-1").remove();
+		$(".btn-style").remove();
+		$(".carousel-item-2").addClass("active");
+		console.log("Class added");
+		console.log("Inside the initializeIngredients");
+		$("#question-2").text("What do you have in your fridge?");
+
 		
 	}
 });
