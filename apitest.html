@@ -58,24 +58,55 @@
 </nav>
 
 <body>
-    <div class="d-flex justify-content-around flex-wrap">
+        <div id="results-container" class="container d-flex justify-content-around flex-wrap">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <div id="module" class="card" style="width: 22rem;">
-            <img class="drink card-img-top">
-            <div class="card-body">
-                <p class="drink card-text"></p>
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 22rem;">
+                    <img class="drink card-img-top">
+                    <p id="drink-title" class="result-title"></p>
+                    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#drink-text"
+                        aria-expanded="false" aria-controls="drink-text">
+                        See More
+                    </button>
+                    <div class="collapse" id="drink-text">
+                        <div class="card-body">
+                            <p class="drink card-text"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card" style="width: 22rem;">
-            <img class="food card-img-top">
-            <div class="card-body">
-                <p class="food card-text"></p>
+
+            <div class="col">
+                <div class="card" style="width: 22rem;">
+                    <img class="food card-img-top">
+                    <p id="food-title" class="result-title"></p>
+                    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#food-text"
+                        aria-expanded="false" aria-controls="food-text">
+                        See More
+                    </button>
+                    <div class="collapse" id="food-text">
+                        <div class="card-body">
+                            <p class="food card-text"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card" style="width: 22rem;">
-            <img class="movie card-img-top">
-            <div class="card-body">
-                <p class="movie card-text"></p>
+
+            <div class="col">
+                <div class="card" style="width: 22rem;">
+                    <img class="movie card-img-top">
+                    <p id="movie-title" class="result-title"></p>
+                    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#movie-text"
+                        aria-expanded="false" aria-controls="movie-text">
+                        See More
+                    </button>
+                    <div class="collapse" id="movie-text">
+                        <div class="card-body">
+                            <p class="movie card-text"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -102,7 +133,7 @@
 
                 })
 
-                $(".drink").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
+                $("#drink-title").append($("<p id=\"drink-title\">").text(response.drinks[0].strDrink))
                 $(".drink").append($("<p><strong>Ingredients:</strong></p>"))
 
                 var cnt = 1;
@@ -149,7 +180,7 @@
 
                 })
                 var pMeal = $("<p>").addClass("collapse").attr("aria-expanded", false);
-                $(".food").append($("<p id=\"food-title\">").text(response.meals[0].strMeal))
+                $("#food-title").append($("<p id=\"food-title\">").text(response.meals[0].strMeal))
                 $(".food").append($("<p><strong>Ingredients:</strong></p>"))
 
                 var cnt = 1;
@@ -190,7 +221,7 @@
                 "src": "https://image.tmdb.org/t/p/w500" + response.results[0].backdrop_path,
                 "width": 200,
             })
-            $(".movie").append($("<p id=\"movie-title\">").text(response.results[0].title))
+            $("#movie-title").append($("<p id=\"movie-title\">").text(response.results[0].title))
             $(".movie").append($("<p><strong>Release Date:</strong></p>"))
             $(".movie").append($("<p>").text(response.results[0].release_date))
             $(".movie").append($("<p><strong>Overview:</strong></p>"))
