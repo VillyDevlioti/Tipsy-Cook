@@ -15,7 +15,7 @@ var database = firebase.database();
 
 var moods =["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
 var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
-var userSelection = ""; //user mood selection
+var userMSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
 var userEmail="";
@@ -73,15 +73,15 @@ $(document).ready(function () {
 				}, function (errorObject) {
 					console.log("The read failed: " + errorObject.code);
         });
-        
-    
-        initializeMoodTest();
+
 
       }; 
 
       //After we click on submit button, we want the user to be presented with the moods
 
-      //Call initialize Mood Test
+	  //Call initialize Mood Test
+	  	console.log("Initializing buttons")
+    	initializeMoodTest();
 
     });
     
@@ -99,11 +99,12 @@ function initializeMoodTest ()
   $(".headline").remove();
   $("#carousel").css("display","block");
   $(".modal").remove();
+  $(".carousel-item-1").addClass("active");
+  console.log("Class added");
   $("#question-1").text("How are you feeling today?");
         newButton = $(".btn-style");
         console.log("column created");
-
-        initButtons(moods);
+		//initButtons(moods);
         
 }
 
@@ -117,19 +118,36 @@ function initButtons (arr){
       userSelection = $(this).attr("data-search");
       console.log(userSelection);
 
+	  console.log("Checking if it exists!");
+/* 	  //now we need to check firebase for email in order to assign the user selection to the right user. 
+/* 		database.ref("/user-data").orderByChild("email").equalTo(userEmail).once("value",snapshot => {
+		  if (snapshot.exists()){
+				const userData = snapshot.val();
+			  console.log("exists!", userData);
+			  //go to the specific user and assign the mood
+  /* 			database.ref('/user-data/email').set({
+				  mood: userSelection  
+		  }) 
+	  }
+	  }); 
 
+  }); */
 
   });
+	
 
-  //now we need to check firebase for email in order to assign the user selection to the right user. 
-  if (database.ref.child('/user-data').orderByChild('email').equalTo(userEmail).exists()) {
-    //go to the specific user and assign the mood
-    console.log(database.ref('/user-data').orderByChild('email').equalTo(userEmail).exists())
-  }
-
-}
+} 
 
 });
+
+//should there be separate userSelection for food/drink/mood/etc or for now just keep it as is?
+//keep as is - I want to make this work for the first one. Now it's not even console logging the userSelection
+//can you go live - I wanna see if it'll share the chrome screen
+//sure didn't work but that's okay!
+//I fixed it!
+//ok checking on my chrome
+
+
 
 
 
