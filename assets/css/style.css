@@ -101,3 +101,7 @@ h1, h2, #about-p {
 .modal-backdrop.show {
     opacity: 0;
 }
+
+.carousel {
+    display: none;
+}
