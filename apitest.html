@@ -179,7 +179,7 @@
         }
 
         var randomMoviePage = Math.floor(Math.random() * 81);
-        //replace genres = .... by user's choice of genre
+        //replace "genres =" by user's choice of genre
         var queryURL3 = "https://api.themoviedb.org/3/discover/movie?api_key=382e387c6f775bd0c85d17d888409d89&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + randomMoviePage + "&vote_average.gte=6&with_genres=9648";
         $.ajax({
             url: queryURL3,
