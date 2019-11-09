@@ -52,16 +52,19 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li id="sign-in-li" class="nav-item active">
-                    <a id="sign-in-nav" class="nav-link" href="#">Sign In</a>
+                    <a id="nav-sign-in" class="nav-link" href="#">Sign In</a>
                 </li>
-                <li class="nav-item">
-                    <a id="mood-nav" class="nav-link disabled" href="https://villydevlioti.github.io/Tipsy-Cook/test.html">Mood Quiz</a>
+                <li id="mood-li" class="nav-item">
+                    <a id="nav-mood" class="nav-link disabled"
+                        href="https://villydevlioti.github.io/Tipsy-Cook/test.html">Mood Quiz</a>
                 </li>
-                <li class="nav-item">
-                    <a id="results-nav" class="nav-link disabled" href="https://villydevlioti.github.io/Tipsy-Cook/apitest.html">Results</a>
+                <li id="results-li" class="nav-item">
+                    <a id="nav-results" class="nav-link"
+                        href="https://villydevlioti.github.io/Tipsy-Cook/apitest.html">Feeling Lucky</a>
                 </li>
-                <li class="nav-item">
-                    <a id="about-nav" class="nav-link disabled" href="https://villydevlioti.github.io/Tipsy-Cook/about.html">About</a>
+                <li id="about-li" class="nav-item">
+                    <a id="nav-about" class="nav-link"
+                        href="https://villydevlioti.github.io/Tipsy-Cook/about.html">About</a>
                 </li>
             </ul>
         </div>
@@ -113,7 +116,8 @@
     </div>
 
     <!--Questions DIV-->
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false"
+        data-wrap="false">
         <div class="carousel-inner">
             <div class="carousel-item carousel-item-1">
                 <div class="row justify-content-center">
@@ -159,8 +163,16 @@
     <!--Modal-->
     <script src="./assets/js/script.js"></script>
 
+    <script type="text/javascript">
+        $("#nav-sign-out").on("click", function () {
+            firebase.auth().signOut().then(function () {
+                console.log('Signed Out');
+            }, function (error) {
+                console.error('Sign Out Error', error);
+            });
+        })
+    </script>
+
 </body>
 
 </html>
-
-<!--hi-->
