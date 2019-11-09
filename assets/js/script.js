@@ -97,7 +97,7 @@ $(document).ready(function () {
 		$("#sign-in-nav").text("Sign Out");
 		$(".nav-link").removeClass("disabled");
 		$("#sign-in-li").removeClass("active");
-		$("#mood-nav").addClass("active");
+		$("#nav-mood").addClass("active");
 		$(".headline").remove();
 		$(".carousel").css("display", "block");
 		$(".modal-backdrop").remove();
