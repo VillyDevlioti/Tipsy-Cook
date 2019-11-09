@@ -96,7 +96,7 @@ $(document).ready(function () {
 	//function to show test questions
 
 	function initializeMoodTest(userEmail) {
-		$("#sign-in-nav").text("Sign Out");
+		$("#nav-sign-in").text("Sign Out");
 		$(".nav-link").removeClass("disabled");
 		$("#sign-in-li").removeClass("active");
 		$("#sign-in-li").addClass("nav-sign-out");
@@ -115,40 +115,41 @@ $(document).ready(function () {
 	}
 
 
-function initButtons (arr, email){
-  for (var i=0; i<arr.length; i++){
-      newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\""+arr[i]+"\">"+arr[i]+"</button>");
-      console.log("new button created");
-  }
-  
-  $(".btn").on("click", function(){
-	userSelection = $(this).attr("data-search");
-	console.log(email);
-	console.log(userSelection);
+	function initButtons(arr, email) {
+		for (var i = 0; i < arr.length; i++) {
+			newButton = newButton.append("<button type=\"button\" class=\"btn btn-outline-light btn-lg btn-style\" id=\"mood-button\" data-search=\"" + arr[i] + "\">" + arr[i] + "</button>");
+			console.log("new button created");
+		}
 
-
-		$("#mood-button").on("click", function () {
+		$(".btn").on("click", function () {
 			userSelection = $(this).attr("data-search");
 			console.log(email);
+			console.log(userSelection);
+
+
+			$("#mood-button").on("click", function () {
+				userSelection = $(this).attr("data-search");
+				console.log(email);
+
+			});
+
+
+			//now we need to check firebase for email in order to assign the user selection to the right user. 
+			let usersRef = database.ref('user-data');
+			usersRef.orderByChild('email').equalTo(email).on("value", function (snapshot) {
+				console.log(snapshot.val());
+				snapshot.forEach(function (data) {
+					console.log("data key:", data.key);
+				});
+			});
 
 		});
-
-
-//now we need to check firebase for email in order to assign the user selection to the right user. 
-  let usersRef = database.ref('user-data');
-	usersRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
-		  console.log(snapshot.val());
-		  snapshot.forEach(function(data) {
-		  console.log("data key:", data.key);
-	  });
-  }); 
-
-}
+	}
 
 		
 
 
-	}
+	
 	
 });
 
