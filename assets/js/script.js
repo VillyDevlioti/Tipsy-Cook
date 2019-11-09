@@ -13,100 +13,104 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var moods =["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
+var moods = ["happy", "romantic", "sad", "optimistic", "tired"]; //predefined moods 
 var ingredients = ["tomato", "celery", "potato"]; //predefined ingredients
 var userSelection = ""; //user mood selection
 var userFirstName = "";
 var userLastName = "";
-var userEmail="";
+var userEmail = "";
 var newButton;
 
 $(document).ready(function () {
 	console.log("ready!");
 
-		//create onclick event for user submitting user information
-		$("#submit-button").on("click", function (event) {
+	//create onclick event for user submitting user information
+	$("#submit-button").on("click", function (event) {
+		event.preventDefault();
+		// Get the input values
+		var userFirstName = $("#sign-in-first-name-input").val().trim();
+		var userLastName = $("#sign-in-last-name-input").val().trim();
+		var userEmail = $("#sign-in-email-input").val().trim();
+		var indexat = userEmail.indexOf("@"); //Index of "@" in the email field
+		var indexdot = userEmail.indexOf("."); //Index of "." in the email field
+
+		//Validation of form. The function will display message if input field is blank or incorrect
+		if (userFirstName == "") {
+			$("#sign-in-first-name-input").focus();
+			$("#custom-feedback-1").css("display", "block");
 			event.preventDefault();
-			// Get the input values
-			var userFirstName = $("#sign-in-first-name-input").val().trim();
-			var userLastName = $("#sign-in-last-name-input").val().trim();
-			var userEmail = $("#sign-in-email-input").val().trim();
-			var indexat = userEmail.indexOf("@"); //Index of "@" in the email field
-			var indexdot = userEmail.indexOf("."); //Index of "." in the email field
 
-			//Validation of form. The function will display message if input field is blank or incorrect
-			if (userFirstName == "") {
-				$("#sign-in-first-name-input").focus();
-				$("#custom-feedback-1").css("display", "block");
-				event.preventDefault();
-				event.stopPropagation();
-			} else if (userLastName == "") {
-				$("#sign-in-last-name-input").focus();
-				$("#custom-feedback-2").css("display", "block");
-				event.preventDefault();
-				event.stopPropagation();
-			} else if (indexat < 1 || (indexdot - indexat) < 2) {
-				//alert('Please enter a valid Email Id');
-				$('#sign-in-email-input').focus();
-				$("#custom-feedback-3").css("display", "block");
-				event.preventDefault();
-				event.stopPropagation();
-			} else {
-				// Log the user information
-				console.log(userFirstName);
-				console.log(userLastName);
-        console.log(userEmail);
-        
+			event.stopPropagation();
+		} else if (userLastName == "") {
+			$("#sign-in-last-name-input").focus();
+			$("#custom-feedback-2").css("display", "block");
+			event.preventDefault();
+			event.stopPropagation();
+		} else if (indexat < 1 || (indexdot - indexat) < 2) {
+			//alert('Please enter a valid Email Id');
+			$('#sign-in-email-input').focus();
+			$("#custom-feedback-3").css("display", "block");
+			event.preventDefault();
+			event.stopPropagation();
+		} else {
+			// Log the user information
+			console.log(userFirstName);
+			console.log(userLastName);
+			console.log(userEmail);
 
-				// Save the new user info in Firebase.
-				database.ref('/user-data').push({
-					firstName: userFirstName,
-					lastName: userLastName,
-					email: userEmail,
-				});
+			// Save the new user info in Firebase.
+			database.ref('/user-data').push({
+				firstName: userFirstName,
+				lastName: userLastName,
+				email: userEmail,
+			});
 
-				database.ref('/user-data').on("value", function (snapshot) {
+			database.ref('/user-data').on("value", function (snapshot) {
 
-					console.log(snapshot.val());
+				console.log(snapshot.val());
 
-					// If any errors are experienced, log them to console.
-				}, function (errorObject) {
-					console.log("The read failed: " + errorObject.code);
-        });
+				// If any errors are experienced, log them to console.
+			}, function (errorObject) {
+				console.log("The read failed: " + errorObject.code);
+			});
 
 
-      }; 
+		};
 
-      //After we click on submit button, we want the user to be presented with the moods
+		//After we click on submit button, we want the user to be presented with the moods
 
-	  //Call initialize Mood Test
-	  	console.log("Initializing buttons")
-    	initializeMoodTest(userEmail);
+		//Call initialize Mood Test
+		console.log("Initializing buttons")
+		initializeMoodTest();
 
-    });
-    
-    
-/* 
-		//on.click event when user clicks "feeling lucky" button that will bring them to a random page.
-		$("#random").on("click", function (event) {
-			$(location).attr('href', 'test.html'); // need to create random html and fix link here!
-		});
-	 */
+	});
 
-//function to show test questions
-function initializeMoodTest (userEmail)
-{
-  $(".headline").remove();
-  $("#carousel").css("display","block");
-  $(".modal").remove();
-  $(".carousel-item-1").addClass("active");
-  console.log("Class added");
-  $("#question-1").text("How are you feeling today?");
-        newButton = $(".btn-style");
-        console.log("column created");
-		initButtons(moods, userEmail);
-        
-}
+
+	/* 
+			//on.click event when user clicks "feeling lucky" button that will bring them to a random page.
+			$("#random").on("click", function (event) {
+				$(location).attr('href', 'test.html'); // need to create random html and fix link here!
+			});
+		 */
+
+	//function to show test questions
+	function initializeMoodTest() {
+		$("#sign-in-nav").text("Sign Out");
+		$(".nav-link").removeClass("disabled");
+		$("#sign-in-li").removeClass("active");
+		$("#nav-mood").addClass("active");
+		$(".headline").remove();
+		$(".carousel").css("display", "block");
+		$(".modal-backdrop").remove();
+		$(".modal").remove();
+		$(".carousel-item-1").addClass("active");
+		console.log("Class added");
+		$("#question-1").text("How are you feeling today?");
+		newButton = $(".btn-style");
+		console.log("column created");
+		//initButtons(moods);
+
+	}
 
 function initButtons (arr, email){
   for (var i=0; i<arr.length; i++){
@@ -132,16 +136,7 @@ console.log(email);
   }); 
 	
 
-} 
-
 });
-
-//should there be separate userSelection for food/drink/mood/etc or for now just keep it as is?
-//keep as is - I want to make this work for the first one. Now it's not even console logging the userSelection
-//can you go live - I wanna see if it'll share the chrome screen
-//sure didn't work but that's okay!
-//I fixed it!
-//ok checking on my chrome
 
 
 
